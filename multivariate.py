@@ -23,4 +23,4 @@ while norm_mb > 0.01:
         step_size *= 0.5
     last_loss = loss
     norm_mb = np.linalg.norm(partial_mb)
-    print(f"loss:{loss}, partial_m:{partial_mb}")
+    print(f"loss:{loss}, partial_mb:{partial_mb}")
