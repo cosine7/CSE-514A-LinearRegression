@@ -1,6 +1,5 @@
 import pandas as pd
-import univariate
-import multivariate
+from algorithms import multivariate, univariate
 
 if __name__ == '__main__':
     data = pd.read_excel("data/Concrete_Data.xls", "Sheet1").to_numpy()
