@@ -10,8 +10,9 @@ def run(data):
     mb = np.zeros(column_count).reshape(-1, 1)
     norm_mb = math.inf
     last_loss = math.inf
+    count = 0
 
-    while norm_mb > 0.01:
+    while norm_mb > 0.01 and count < 50000:
         loss = ((y - x @ mb) ** 2).sum() / row_count
         partial_mb = (2 * x.T @ x @ mb - 2 * x.T @ y) / row_count
 
@@ -22,4 +23,5 @@ def run(data):
             step_size *= 0.5
         last_loss = loss
         norm_mb = np.linalg.norm(partial_mb)
+        count += 1
         print(f"loss:{loss}, partial_mb:{partial_mb}")
