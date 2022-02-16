@@ -12,9 +12,9 @@ if __name__ == '__main__':
     training_data = data[:900, :]
     testing_data = data[900:, :]
 
-    mb_training = univariate.run(training_data)
+    # mb_training = univariate.run(training_data)
     # mb_testing = univariate.run(testing_data)
-    # result_multi = multivariate.run(training_data)
+    result_multi = multivariate.run(training_data)
 
     # y_training = training_data[:, -1]
     # y_testing = testing_data[:, -1]

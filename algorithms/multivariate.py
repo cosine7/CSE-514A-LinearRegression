@@ -1,6 +1,6 @@
 import math
 import numpy as np
-
+from algorithms import variance_explained
 
 def run(data):
     row_count, column_count = data.shape
@@ -24,5 +24,8 @@ def run(data):
         last_loss = loss
         norm_mb = np.linalg.norm(partial_mb)
         count += 1
-        print(f"loss:{loss}, partial_mb:{partial_mb}")
+        # print(f"loss:{loss}, partial_mb:{partial_mb}")
+
+    print(variance_explained.calc(x @ mb, y))
+
     return mb
