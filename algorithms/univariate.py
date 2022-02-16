@@ -40,6 +40,7 @@ def run(data, data_type, raw):
 
         predicted = np.vectorize(predicted)(x)
         plt.scatter(raw[:, column], y)
+        plt.title(f"column (feature): {column} for {data_type} data")
         plt.xlabel("predictor variable")
         plt.ylabel("response variable")
         plt.plot(raw[:, column], predicted, color="yellow")
