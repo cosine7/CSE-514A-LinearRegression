@@ -12,8 +12,7 @@ def run(data):
     norm_mb = math.inf
     last_loss = math.inf
     count = 0
-
-    while norm_mb > 0.01 and count < 50000:
+    while norm_mb > 0.01 and count < 100000:
         loss = ((y - x @ mb) ** 2).sum() / row_count
         partial_mb = (2 * x.T @ x @ mb - 2 * x.T @ y) / row_count
 
@@ -26,7 +25,4 @@ def run(data):
         norm_mb = np.linalg.norm(partial_mb)
         count += 1
         # print(f"loss:{loss}, partial_mb:{partial_mb}")
-
-    print(variance_explained.calc(x @ mb, y))
-
-    return mb
+    return [mb, variance_explained.calc(x @ mb, y)]

@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 from algorithms import multivariate, univariate, utility, variance_explained
 
@@ -18,3 +17,11 @@ if __name__ == '__main__':
     result_uni_normalized = univariate.run(training_data_normalized, "normalized", training_data)
     print(result_uni_normalized[1])
     print(variance_explained.univariate(result_uni_normalized[0], testing_data_normalized, testing_response))
+
+    result_multi = multivariate.run(training_data)
+    print(result_multi[1])
+    print(variance_explained.multivariate(result_multi[0], testing_data, testing_response))
+
+    result_multi_normalized = multivariate.run(training_data_normalized)
+    print(result_multi_normalized[1])
+    print(variance_explained.multivariate(result_multi_normalized[0], testing_data_normalized, testing_response))

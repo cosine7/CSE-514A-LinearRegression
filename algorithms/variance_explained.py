@@ -18,3 +18,9 @@ def univariate(mb, data, response):
         result.append(calc(np.vectorize(predicted)(data[:, column]), response))
     return result
 
+
+def multivariate(mb, data, response):
+    row_count, column_count = data.shape
+    y = response.reshape(-1, 1)
+    x = np.concatenate([data[:, :-1], np.ones(row_count).reshape(-1, 1)], axis=1)
+    return calc(x @ mb, y)

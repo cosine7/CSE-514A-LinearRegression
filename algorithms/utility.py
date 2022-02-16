@@ -11,6 +11,7 @@ def mean_normalization(data):
         min_ = x.min()
         denominator = max_ - min_
         if denominator == 0:
+            result[:, column] = 0
             continue
 
         def normalize(val):
