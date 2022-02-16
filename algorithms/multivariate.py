@@ -2,6 +2,7 @@ import math
 import numpy as np
 from algorithms import variance_explained
 
+
 def run(data):
     row_count, column_count = data.shape
     step_size = 0.00001

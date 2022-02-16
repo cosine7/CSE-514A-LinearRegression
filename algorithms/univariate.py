@@ -1,24 +1,17 @@
 import math
-import matplotlib.pyplot as plt
 import numpy as np
 from algorithms import variance_explained
+import matplotlib.pyplot as plt
 
 
-def run(data):
+def run(data, data_type, raw):
     y = data[:, -1]
     row_count, column_count = data.shape
-    result = []
+    result = [[], []]
     for column in range(column_count - 1):
         m = 10
         b = 10
         x = data[:, column]
-        mean = x.mean()
-        max_ = x.max()
-        min_ = x.min()
-
-        def mean_normalization(val):
-            return (val - mean) / (max_ - min_)
-        normalized_x = np.vectorize(mean_normalization)(x)
 
         partial_m = 10
         partial_b = 10
@@ -26,9 +19,9 @@ def run(data):
         count = 0
         step_size = 0.00001
         while abs(partial_m) + abs(partial_b) > 0.01 and count < 100000:
-            loss = ((y - normalized_x * m - b) ** 2).sum() / row_count
-            partial_m = (-2 * normalized_x * (y - m * normalized_x - b)).sum() / row_count
-            partial_b = (-2 * (y - m * normalized_x - b)).sum() / row_count
+            loss = ((y - x * m - b) ** 2).sum() / row_count
+            partial_m = (-2 * x * (y - m * x - b)).sum() / row_count
+            partial_b = (-2 * (y - m * x - b)).sum() / row_count
 
             m -= step_size * partial_m
             b -= step_size * partial_b
@@ -45,11 +38,11 @@ def run(data):
         def predicted(n):
             return m * n + b
 
-        predicted = np.vectorize(predicted)(normalized_x)
-        plt.scatter(x, y)
-        plt.plot(x, predicted, color="yellow")
-        plt.savefig(f"results/univariate/{column}")
+        predicted = np.vectorize(predicted)(x)
+        plt.scatter(raw[:, column], y)
+        plt.plot(raw[:, column], predicted, color="yellow")
+        plt.savefig(f"results/univariate_{data_type}/{column}")
         plt.clf()
-        result.append([m, b])
-        print(variance_explained.calc(predicted, y))
+        result[0].append([m, b])
+        result[1].append(variance_explained.calc(predicted, y))
     return result
