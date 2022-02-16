@@ -40,6 +40,8 @@ def run(data, data_type, raw):
 
         predicted = np.vectorize(predicted)(x)
         plt.scatter(raw[:, column], y)
+        plt.xlabel("predictor variable")
+        plt.ylabel("response variable")
         plt.plot(raw[:, column], predicted, color="yellow")
         plt.savefig(f"results/univariate_{data_type}/{column}")
         plt.clf()
