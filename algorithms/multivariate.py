@@ -4,7 +4,7 @@ import numpy as np
 
 def run(data):
     row_count, column_count = data.shape
-    step_size = 0.0001
+    step_size = 0.00001
     y = data[:, -1].reshape(-1, 1)
     x = np.concatenate([data[:, :-1], np.ones(row_count).reshape(-1, 1)], axis=1)
     mb = np.zeros(column_count).reshape(-1, 1)
@@ -25,3 +25,4 @@ def run(data):
         norm_mb = np.linalg.norm(partial_mb)
         count += 1
         print(f"loss:{loss}, partial_mb:{partial_mb}")
+    return mb

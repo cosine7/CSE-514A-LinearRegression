@@ -1,10 +1,11 @@
 import math
-
+import matplotlib.pyplot as plt
+import numpy as np
 
 def run(data):
     y = data[:, -1]
     row_count, column_count = data.shape
-
+    result = []
     for column in range(column_count - 1):
         m = 10
         b = 10
@@ -28,4 +29,15 @@ def run(data):
             last_loss = loss
             # print(f"loss:{loss}, partial_m:{partial_m}, partial_b:{partial_b}")
             count += 1
-        print(last_loss)
+        # print(last_loss)
+
+
+        def predicted(n):
+            return m * n + b
+        np.vectorize(predicted)(x)
+        plt.scatter(x, y)
+        plt.plot(x, np.vectorize(predicted)(x), color="yellow")
+        plt.savefig(f"results/univariate/{column}")
+        plt.clf()
+        result.append([m, b])
+    return result
