@@ -19,7 +19,7 @@ def univariate(mb, data, response):
     return result
 
 
-def multivariate(mb, data, response):
+def use_matrix(mb, data, response):
     row_count, column_count = data.shape
     y = response.reshape(-1, 1)
     x = np.concatenate([data[:, :-1], np.ones(row_count).reshape(-1, 1)], axis=1)
